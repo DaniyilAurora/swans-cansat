@@ -26,9 +26,11 @@ CanSat limits mass of the satellite to be 300-350 grams, and we will use drag co
 $$A=\frac{2(0.350)(9.81)}{(1.225)(2)^2(1)}$$
 
 Which results in.
+
 $$A\approx 1.40\ m^2$$
 
 Which means that the radius of our parachute should be.
+
 $$A=\sqrt{\frac{A}{\pi}}=\sqrt{\frac{1.40}{\pi}}\approx 0.6\ m$$
 
 So, now we have radius, also what we would like to know is how much time it will take for a model to descend from 1000 metres to ground. For this we do simple calculation.
