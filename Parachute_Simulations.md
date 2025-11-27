@@ -18,6 +18,7 @@ At steady speed drag equals to weight.
 $$mg=\frac{1}{2}\rho v^2CA$$
 
 Now we rearrange in order to get the area.
+
 $$A=\frac{2mg}{\rho V^2C}$$
 
 CanSat limits mass of the satellite to be 300-350 grams, and we will use drag coefficient of 1 for our calculations. Now we apply all of the values to the formula.
