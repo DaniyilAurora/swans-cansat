@@ -21,3 +21,7 @@ The project consists from two separate modules, the ground station and the satel
 - Design and order a custom PCB.
 - Design and build a parachute.
 - Assemble everything into one unit.
+
+
+### Our Secondary Mission:
+For our secondary mission we have decided to do advanced telemetry and atmospheric analysis. This will include extra sensors such as GPS, a Gyroscope, Temperature and Humidity, Low concentration ozon sensor and a a Carbon Dioxide sensor and in the future an oxygen sensor. With the data from these sensors, we hope to be able to determine whether the atmosphere of a certain planet is suitable for human life.
