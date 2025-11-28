@@ -18,6 +18,7 @@ The project consists from two separate modules, the ground station and the satel
 | ---- | ------- | ---- | ----- |
 | ESP32 Lora V3 | Antenna / Communication Module | [Amazon](https://www.amazon.es/Meshtastic-Modules-Integrated-Bluetooth-Compatibility/dp/B0FP4V2F5B/ref=sr_1_3_sspa?crid=H4AIX1X5NQ59&dib=eyJ2IjoiMSJ9.zwetVbXiR7BCxoph8ssnVZ_Xf7GDX9qLktNk3j7BGPaF_2JwMLs3bMW4cwU2VnnwR9vOpWLq1AtweAUpiR3LSxaJclpKJu8YslozlQk7cG6qfYedzTUgNqlEaQLMYETGvoNz6OER7OkGh51I9x6KXzN45C760aZsgEoYfQa3JpsrnEduvdf1U9NXCoSCuzOYNkUsSPpJGawcXMQIDSB0cogDZzw3hgVg_6yUyao_3y3VFgXwU_22MW8CdxpNEZE63RbzSzJcvZIKRdaTGCROlevbrCwnt-I-h3LTE0CAYGE.Q9-R33MuNUlUu81I1830wppSjUnE8IzubKxU5iP5wj0&dib_tag=se&keywords=lora+32&qid=1764274741&sprefix=lora+32%2Caps%2C63&sr=8-3-spons&aref=C9ZI9PftmL&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1) | € 31.99 |
 | 3m Long 50 ohm coaxial cable | Connexts the Yagi-Uda Antenna to the Amplifier and from the amplifier to the Lora receiver | [Aliexpress]([https://www.amazon.es/Meshtastic-Modules-Integrated-Bluetooth-Compatibility/dp/B0FP4V2F5B/ref=sr_1_3_sspa?crid=H4AIX1X5NQ59&dib=eyJ2IjoiMSJ9.zwetVbXiR7BCxoph8ssnVZ_Xf7GDX9qLktNk3j7BGPaF_2JwMLs3bMW4cwU2VnnwR9vOpWLq1AtweAUpiR3LSxaJclpKJu8YslozlQk7cG6qfYedzTUgNqlEaQLMYETGvoNz6OER7OkGh51I9x6KXzN45C760aZsgEoYfQa3JpsrnEduvdf1U9NXCoSCuzOYNkUsSPpJGawcXMQIDSB0cogDZzw3hgVg_6yUyao_3y3VFgXwU_22MW8CdxpNEZE63RbzSzJcvZIKRdaTGCROlevbrCwnt-I-h3LTE0CAYGE.Q9-R33MuNUlUu81I1830wppSjUnE8IzubKxU5iP5wj0&dib_tag=se&keywords=lora+32&qid=1764274741&sprefix=lora+32%2Caps%2C63&sr=8-3-spons&aref=C9ZI9PftmL&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1](https://es.aliexpress.com/i/33007337993.html?gatewayAdapt=glo2esp)) | € 4.67 |
+| | | Total | € 36.66 |
 
 
 ### What we plan to do:
@@ -32,5 +33,6 @@ The project consists from two separate modules, the ground station and the satel
 
 ### Our Secondary Mission:
 For our secondary mission we have decided to do advanced telemetry and atmospheric analysis. This will include extra sensors such as GPS, a Gyroscope, Temperature and Humidity, Low concentration ozon sensor and a a Carbon Dioxide sensor and in the future an oxygen sensor. With the data from these sensors, we hope to be able to determine whether the atmosphere of a certain planet is suitable for human life.
+
 
 
