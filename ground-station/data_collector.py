@@ -1,5 +1,7 @@
 import serial
+import os
 
+# Data
 channel = "COM3"
 rate = 111520
 
@@ -12,5 +14,7 @@ while 1:
         temp = data[0]
         hum = data[1]
 
+        os.system("cls")
+        print("[Data]:")
         print("Temperature: " + temp + "c")
         print("Humidity: " + hum + "%")
