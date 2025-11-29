@@ -1,17 +1,29 @@
+#include "DHT.h"
+
+#define DHTPIN 2
+#define DHTTYPE DHT22
+
+DHT dht(DHTPIN, DHTTYPE);
+
 int comPin = 10;
 
 void setup() {
   Serial.begin(9600);
   pinMode(comPin, OUTPUT);
-  randomSeed(analogRead(0));
+
+  dht.begin();
 }
 
 long temp;
 long hum;
 
 void loop() {
-  temp = random(102, 999); // Random temp between 10.2 and 99.9
-  hum = random(102, 999); // Random humidity between 10.2 and 99.9
+  float rtemp = dht.readTemperature();
+  float rhum = dht.readHumidity();
+
+  temp = (long)(rtemp * 10);
+  hum = (long)(rhum * 10);
+
   // Starting communication
   digitalWrite(comPin, HIGH);
   delay(70); 

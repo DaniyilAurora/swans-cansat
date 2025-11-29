@@ -9,6 +9,7 @@ from trajectory import Trajectory
 class Simulation:
     def __init__(self):
         pg.init()
+        pg.font.init()
         self.screen = pg.display.set_mode((utils.WIDTH, utils.HEIGHT))
         self.clock = pg.time.Clock()
         self.running = True
@@ -30,6 +31,21 @@ class Simulation:
         self.oxygen_data = []
 
         self.trajectory_data = [(0, 0), (2, 50), (5, 250), (7, 560), (10, 890), (15, 990), (18, 1000), (19, 1000), (20, 990), (25, 750)]
+
+        self.borders = []
+        self.borders.append(pg.Rect(0, utils.PANE_HEIGHT-2, utils.PANE_WIDTH, 4))
+        self.borders.append(pg.Rect(0, 2 * utils.PANE_HEIGHT-2, utils.PANE_WIDTH, 4))
+        self.borders.append(pg.Rect(0, 3 * utils.PANE_HEIGHT-2, utils.PANE_WIDTH, 4))
+        self.borders.append(pg.Rect(0, 4 * utils.PANE_HEIGHT-2, utils.PANE_WIDTH, 4))
+        self.borders.append(pg.Rect(utils.PANE_WIDTH - 2, 0, 4, utils.HEIGHT))
+
+        self.font = pg.font.SysFont("Arial", 30)
+        self.captions = []
+        self.captions.append(self.font.render("Temperature", False, pg.Color("white")))
+        self.captions.append(self.font.render("Humidity", False, pg.Color("white")))
+        self.captions.append(self.font.render("Ozone", False, pg.Color("white")))
+        self.captions.append(self.font.render("Carbon", False, pg.Color("white")))
+        self.captions.append(self.font.render("Oxygen", False, pg.Color("white")))
 
         self.data_lock = threading.Lock()
         self.serial_thread = threading.Thread(target=self.read_serial, daemon=True)
@@ -77,6 +93,12 @@ class Simulation:
             self.oxygen_pane.draw(self.screen, self.oxygen_data)
 
             self.trajectory.draw(self.screen, self.trajectory_data)
+
+            for border in self.borders:
+                pg.draw.rect(self.screen, pg.Color("black"), border)
+            
+            for i in range(len(self.captions)):
+                self.screen.blit(self.captions[i], (utils.PANE_WIDTH + 10, ((i+1) * utils.PANE_HEIGHT) - utils.PANE_HEIGHT / 2 - 30))
 
             pg.display.flip()
             self.clock.tick(utils.FRAMERATE)
