@@ -1,4 +1,24 @@
-# Parachute Simulations
+# The Parachute 
+
+To build a parachute, we had to do a lot of research regarding the available materials, the different parachute shapes and the size required of each respective combination of parachute shape and material. On this page we will try to discuss all of our research in detail and explain how we got to our final parachute design.
+
+### Parachute Shapes
+
+We based our research on the ESA teachers guide for parachute design. In it, 4 different parachute shapes are presented. The shapes are:
+- Hemispherical Parachute
+- Cross Parachute
+- Paraglider
+- Flat Parachute
+
+We also took a look at the drag coefficient of each parachute as with a higher drag coefficient, the area of the parachute doesn't need to be as large.
+| Parachute Shape | Drag Coefficient |
+| --------------- | ---------------- | 
+| Hemispherical | 0.62-0.77 |
+| Cross | 0.6-0.8 |
+| Paraglider | 0.75-1.10 |
+| Flat | 0.75-0.8 |
+
+After reading through the description of each parachute, we were quickly able to rule out the paraglider shape as we do not need its' steerability combined with the additional complexity. 
 
 There are different pieces of information we want to calculate in order to produce most efficient parachute for our project.
 
