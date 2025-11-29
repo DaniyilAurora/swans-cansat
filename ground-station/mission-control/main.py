@@ -6,7 +6,7 @@ import time
 from pane import Pane
 from trajectory import Trajectory
 
-class Simulation:
+class Mission_Control:
     def __init__(self):
         pg.init()
         pg.font.init()
@@ -14,7 +14,7 @@ class Simulation:
         self.clock = pg.time.Clock()
         self.running = True
 
-        pg.display.set_caption("Module Simulation of Swans CanSat")
+        pg.display.set_caption("Mission Control of Swans CanSat")
 
         self.temp_pane = Pane(0, 0, utils.PANE_WIDTH, utils.PANE_HEIGHT)
         self.hum_pane = Pane(0, 216, utils.PANE_WIDTH, utils.PANE_HEIGHT)
@@ -22,15 +22,17 @@ class Simulation:
         self.carbon_pane = Pane(0, 216*3, utils.PANE_WIDTH, utils.PANE_HEIGHT)
         self.oxygen_pane = Pane(0, 216*4, utils.PANE_WIDTH, utils.PANE_HEIGHT)
 
-        self.trajectory = Trajectory(utils.PANE_WIDTH, 0, utils.TRAJECTORY_WIDTH, utils.TRAJECTORY_HEIGHT)
+        self.trajectory = Trajectory(utils.PANE_WIDTH, 0, utils.TRAJECTORY_WIDTH, utils.TRAJECTORY_HEIGHT - utils.DATA_RECEIVED_WINDOW_HEIGHT)
 
-        self.temp_data = []
-        self.hum_data = []
-        self.ozone_data = []
-        self.carbon_data = []
-        self.oxygen_data = []
+        self.data_received = pg.Rect(utils.PANE_WIDTH, utils.TRAJECTORY_HEIGHT - utils.DATA_RECEIVED_WINDOW_HEIGHT, utils.TRAJECTORY_WIDTH, utils.DATA_RECEIVED_WINDOW_HEIGHT)
 
-        self.trajectory_data = [(0, 0), (2, 50), (5, 250), (7, 560), (10, 890), (15, 990), (18, 1000), (19, 1000), (20, 990), (25, 750)]
+        self.temp_data = [0]
+        self.hum_data = [0]
+        self.ozone_data = [0]
+        self.carbon_data = [0]
+        self.oxygen_data = [0]
+
+        self.trajectory_data = [(0, 0), (2, 50), (5, 250), (6, 350), (6, 450), (7, 560), (10, 890), (12, 950), (15, 990), (18, 1000), (19, 1000), (20, 990), (21, 960), (23, 920), (24, 840), (25, 750)]
 
         self.borders = []
         self.borders.append(pg.Rect(0, utils.PANE_HEIGHT-2, utils.PANE_WIDTH, 4))
@@ -41,15 +43,18 @@ class Simulation:
 
         self.font = pg.font.SysFont("Arial", 30)
         self.captions = []
-        self.captions.append(self.font.render("Temperature", False, pg.Color("white")))
-        self.captions.append(self.font.render("Humidity", False, pg.Color("white")))
-        self.captions.append(self.font.render("Ozone", False, pg.Color("white")))
-        self.captions.append(self.font.render("Carbon", False, pg.Color("white")))
-        self.captions.append(self.font.render("Oxygen", False, pg.Color("white")))
+        self.captions.append(self.font.render("Temperature ", False, utils.TEXT_COLOR))
+        self.captions.append(self.font.render("Humidity", False, utils.TEXT_COLOR))
+        self.captions.append(self.font.render("Ozone", False, utils.TEXT_COLOR))
+        self.captions.append(self.font.render("Carbon", False, utils.TEXT_COLOR))
+        self.captions.append(self.font.render("Oxygen", False, utils.TEXT_COLOR))
 
         self.data_lock = threading.Lock()
         self.serial_thread = threading.Thread(target=self.read_serial, daemon=True)
         self.serial_thread.start()
+
+    def parse_data(self, data):
+        return round(data / 10, 1)
 
     def read_serial(self):
         ser = serial.Serial(utils.PORT, utils.BAUDRATE, timeout=1)
@@ -94,8 +99,17 @@ class Simulation:
 
             self.trajectory.draw(self.screen, self.trajectory_data)
 
+            self.data_received_text = self.font.render("Temp: " + str(self.parse_data(self.temp_data[len(self.temp_data) - 1])) + "°C Hum: " +
+                                            str(self.parse_data(self.hum_data[len(self.hum_data) - 1])) + "% Ozone: " +
+                                            str(self.parse_data(self.ozone_data[len(self.ozone_data) - 1])) + " Carbon: " +
+                                            str(self.parse_data(self.carbon_data[len(self.carbon_data) - 1])) + " Oxygen: " +
+                                            str(self.parse_data(self.oxygen_data[len(self.oxygen_data) - 1])), False, utils.TEXT_COLOR)
+
+            pg.draw.rect(self.screen, utils.GRAPH_BACKGROUND_COLOR, self.data_received)
+            self.screen.blit(self.data_received_text, (utils.PANE_WIDTH + 20, utils.TRAJECTORY_HEIGHT - 50))
+
             for border in self.borders:
-                pg.draw.rect(self.screen, pg.Color("black"), border)
+                pg.draw.rect(self.screen, utils.BORDERS_COLOR, border)
             
             for i in range(len(self.captions)):
                 self.screen.blit(self.captions[i], (utils.PANE_WIDTH + 10, ((i+1) * utils.PANE_HEIGHT) - utils.PANE_HEIGHT / 2 - 30))
@@ -104,7 +118,7 @@ class Simulation:
             self.clock.tick(utils.FRAMERATE)
 
 if __name__ == "__main__":
-    sim = Simulation()
+    sim = Mission_Control()
     sim.run()
 
     pg.quit()

@@ -9,7 +9,7 @@ class Pane:
         self.height = height
 
     def draw(self, screen, data):
-        pg.draw.rect(screen, pg.Color("skyblue4"), pg.Rect(self.x, self.y, self.width, self.height))
+        pg.draw.rect(screen, utils.GRAPH_BACKGROUND_COLOR, pg.Rect(self.x, self.y, self.width, self.height))
 
         for i in range(len(data)):
             self.draw_bar(screen, i, data)
@@ -25,4 +25,4 @@ class Pane:
         y = self.y + self.height - bar_height
         
         bar = pg.Rect(x, y, bar_width, bar_height)
-        pg.draw.rect(screen, pg.Color("orange"), bar)
+        pg.draw.rect(screen, utils.BAR_COLOR, bar)

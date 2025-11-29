@@ -4,7 +4,7 @@ This is a project that is being actively developed by a small team from Swans In
 The project consists from two separate modules, the ground station and the satellite itself.
 
 ### Module Simulation
-![](module-simulation.png)
+![](Mission-control-screenshot.png)
 
 ### Parts used in the CanSat:
 | Name | Purpose | Link | Price |
