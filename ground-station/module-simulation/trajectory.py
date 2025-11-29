@@ -22,3 +22,7 @@ class Trajectory:
                 start_pos = (start_x, start_y)
                 end_pos = (end_x, end_y)
                 pg.draw.line(screen, pg.Color("white"), start_pos, end_pos, 3)
+            
+            module_x = self.x + utils.START_X + (data[len(data) - 1][0] / utils.MAX_X) * self.width
+            module_y = self.y + self.height - (data[len(data) - 1][1] / utils.MAX_Y) * self.height
+            pg.draw.circle(screen, pg.Color("grey43"), (module_x, module_y), 6)

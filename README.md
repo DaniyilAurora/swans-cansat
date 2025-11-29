@@ -3,6 +3,9 @@
 This is a project that is being actively developed by a small team from Swans International School Marbella to take part in the [CanSat Competition in Spain](https://esero.es/cansat).
 The project consists from two separate modules, the ground station and the satellite itself.
 
+### Module Simulation
+![](module-simulation.png)
+
 ### Parts used in the CanSat:
 | Name | Purpose | Link | Price |
 | ---- | ------- | ---- | ----- |
