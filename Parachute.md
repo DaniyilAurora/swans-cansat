@@ -18,7 +18,25 @@ We also took a look at the drag coefficient of each parachute as with a higher d
 | Paraglider | 0.75-1.10 |
 | Flat | 0.75-0.8 |
 
-After reading through the description of each parachute, we were quickly able to rule out the paraglider shape as we do not need its' steerability combined with the additional complexity. 
+After reading through the description of each parachute, we were quickly able to rule out the paraglider shape as we do not need its steerability combined with the additional complexity. 
+
+We also ruled out the hemispherical parachute shape as it is more complicated to assemble than a flat or cross parachute with little advantages over the other two designs.
+
+This left us the cross shape parachute and flat parachute that would move on to our testing.
+
+### Parachute Material
+
+We chose two different materials to test the parachute shapes with: Polyester Fabric and Ripstop Nylon.
+
+Ripstop Nylon was an obvious choice as it is the material recommended in the ESA teachers guide and in many other resources. 
+
+Polyester Fabric may seem less obvious, but we chose it as it is partially breathable and lets some air through. Although this may seem like a disadvantage as a parchute needs to not let air pass to increase drag, it is actually a good thing. If the parachute material does not let air out, air will get trapped in the parachute which will result in instability and oscilations. On most parachutes this is solved with vent holes however those must be calculated well to not be too large or too small. Polyester fabric on the other hand already lets a small amount of air out, removing the need for vents. We are very grateful to Alfred Burger from Tree Frog Satellites for bringing this up to our attention.
+
+### Parachute Experimenting
+
+To find what shape and material combination we will use in our final parachute, we will hold a test. We will assemble a Cross parachute and a flat parachute of various sizes from each material and compare the results in a table. We will analyse the price, mass, flight time, drag coefficients and size to decide which combination to use for the final parachute.
+
+### Formulas
 
 There are different pieces of information we want to calculate in order to produce most efficient parachute for our project.
 
