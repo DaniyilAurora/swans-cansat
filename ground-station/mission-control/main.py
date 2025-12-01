@@ -53,6 +53,19 @@ class Mission_Control:
         self.serial_thread = threading.Thread(target=self.read_serial, daemon=True)
         self.serial_thread.start()
 
+    def rotate(self, lst, n):
+        """Rotate list by n positions to the right"""
+        n = n % len(lst)  # Handle n larger than list length
+        return lst[-n:] + lst[:-n]
+    
+    def validate(self, packet: str) :
+        parsed = packet.split('.')
+        shift = len(parsed) - parsed.index("101")
+
+        parsed = self.rotate(parsed, shift)
+
+        return parsed[1:]
+
     def parse_data(self, data):
         return round(data / 10, 1)
 
@@ -65,11 +78,12 @@ class Mission_Control:
                     data = ser.readline().decode('utf-8').strip()
                     
                     with self.data_lock:
-                        parsed_data = data.split(".")
+                        parsed_data = self.validate(data)
                         self.temp_data.append(int(parsed_data[0]))
                         self.hum_data.append(int(parsed_data[1]))
                     
                     print(f"Received: {data}")
+                    print(parsed_data)
                     
             except Exception as e:
                 print(f"Error: {e}")

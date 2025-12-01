@@ -28,19 +28,32 @@ unsigned long highStart = 0;
 bool wasHigh = false;
 
 #define comPin 34
-#define START_COM_TIME 10
-#define HIGH_COM_TIME 20
-#define LOW_COM_TIME 50
-#define END_COM_TIME 80
-#define MAX_DATAS 2
+#define AMOUNT_DATAS 3
+#define COM_PACKET_SIZE 14
 
-bool isValid(int value, int supposedValue) {
-  return (value <= (supposedValue + 2) && value >= (supposedValue - 2));
+// In microseconds
+#define START_COM_TIME 3000 // 3 ms
+#define HIGH_COM_TIME 8000 // 8 ms
+
+// In miliseconds
+#define LOW_COM_TIME 12 // 12 ms
+#define END_COM_TIME 30 // 30 ms
+
+char binary[COM_PACKET_SIZE + 1];
+
+void resetBinary() {
+  for (int i = 0; i < COM_PACKET_SIZE; i++) {
+    binary[i] = '0';
+  }
+}
+
+bool isValid(unsigned long value, unsigned long supposedValue) {
+  return (value <= (supposedValue + 2000) && value >= (supposedValue - 2000));
 }
 
 int bitsToValue(char binary[]) {
     int value = 0;
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < COM_PACKET_SIZE; i++) {
       value = (value << 1) | (binary[i] - '0');
     }
 
@@ -49,6 +62,11 @@ int bitsToValue(char binary[]) {
 
 void setup() {
     Serial.begin(115200);
+
+    // Initialize binary array
+    resetBinary();
+    binary[COM_PACKET_SIZE] = '\0';  // Null terminator
+
     Mcu.begin(HELTEC_BOARD,SLOW_CLK_TPYE);
 	
     txNumber=0;
@@ -68,14 +86,13 @@ void setup() {
 int temp = 0;
 int hum = 0;
 
-int datasReceived[MAX_DATAS];
+int datasReceived[AMOUNT_DATAS];
 int amountReceived = 0;
 
 unsigned long startTime = 0;
 bool isCommunicating = false;
 
 int currentBit = 0;
-char binary[11] = "0000000000";
 
 void loop() {
   Radio.IrqProcess();
@@ -84,36 +101,33 @@ void loop() {
   
   // Start measuring duration of HIGH signal
   if (value == HIGH && startTime == 0) {
-    startTime = millis();
+    startTime = micros();
   }
   else if (value == LOW && startTime != 0) {
-    unsigned long duration = millis() - startTime;
-    
+    unsigned long duration = micros() - startTime;
+
     // Communication Protocol
     if (isValid(duration, START_COM_TIME)) {
       // Begin communication
       isCommunicating = true;
     }
-    if (isCommunicating && !isValid(duration, END_COM_TIME)) {
+    if (isCommunicating && !isValid(duration, END_COM_TIME * 1000)) {
       // If communicating, and not ending communication
-      if (isValid(duration, HIGH_COM_TIME) && currentBit < 10) {
+      if (isValid(duration, HIGH_COM_TIME) && currentBit < COM_PACKET_SIZE) {
         binary[currentBit] = '1';
         currentBit++;
       }
-      else if (isValid(duration, LOW_COM_TIME) && currentBit < 10) {
+      else if (isValid(duration, LOW_COM_TIME * 1000) && currentBit < COM_PACKET_SIZE) {
         binary[currentBit] = '0';
         currentBit++;
       }
     }
-    else if (isCommunicating && isValid(duration, END_COM_TIME)) {
+    else if (isCommunicating && isValid(duration, END_COM_TIME * 1000)) {
       isCommunicating = false;
       currentBit = 0;
       int value = bitsToValue(binary);
-      
-      // Reset binary array
-      for (int i = 0; i < 10; i++) {
-        binary[i] = '0';
-      }
+
+      resetBinary();
 
       // Use value
       datasReceived[amountReceived] = value;
@@ -125,7 +139,7 @@ void loop() {
   }
 
   if(lora_idle == true) {
-    if (amountReceived == MAX_DATAS) {
+    if (amountReceived == AMOUNT_DATAS) {
       delay(10);
 
       // Combine all of the datas into one string
@@ -148,6 +162,10 @@ void OnTxDone( void )
 	Serial.println("TX done......");
 	lora_idle = true;
   amountReceived = 0;
+  
+  for (int i = 0; i < AMOUNT_DATAS; i++) {
+    datasReceived[i] = 0;
+  }
 }
 
 void OnTxTimeout( void )
