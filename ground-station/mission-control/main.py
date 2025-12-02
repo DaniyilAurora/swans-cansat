@@ -1,4 +1,5 @@
 import serial
+import serial.tools.list_ports
 import threading
 import pygame as pg
 import utils
@@ -53,23 +54,8 @@ class Mission_Control:
         self.serial_thread = threading.Thread(target=self.read_serial, daemon=True)
         self.serial_thread.start()
 
-    def rotate(self, lst, n):
-        """Rotate list by n positions to the right"""
-        n = n % len(lst)  # Handle n larger than list length
-        return lst[-n:] + lst[:-n]
-    
-    def validate(self, packet: str) :
-        parsed = packet.split('.')
-        shift = len(parsed) - parsed.index("101")
-
-        parsed = self.rotate(parsed, shift)
-
-        return parsed[1:]
-
-    def parse_data(self, data):
-        return round(data / 10, 1)
-
     def read_serial(self):
+        print(serial.tools.list_ports.comports())
         ser = serial.Serial(utils.PORT, utils.BAUDRATE, timeout=1)
         
         while self.running:
@@ -78,7 +64,7 @@ class Mission_Control:
                     data = ser.readline().decode('utf-8').strip()
                     
                     with self.data_lock:
-                        parsed_data = self.validate(data)
+                        parsed_data = utils.validate(data)
                         self.temp_data.append(int(parsed_data[0]))
                         self.hum_data.append(int(parsed_data[1]))
                     
@@ -113,11 +99,11 @@ class Mission_Control:
 
             self.trajectory.draw(self.screen, self.trajectory_data)
 
-            self.data_received_text = self.font.render("Temp: " + str(self.parse_data(self.temp_data[len(self.temp_data) - 1])) + "°C Hum: " +
-                                            str(self.parse_data(self.hum_data[len(self.hum_data) - 1])) + "% Ozone: " +
-                                            str(self.parse_data(self.ozone_data[len(self.ozone_data) - 1])) + " Carbon: " +
-                                            str(self.parse_data(self.carbon_data[len(self.carbon_data) - 1])) + " Oxygen: " +
-                                            str(self.parse_data(self.oxygen_data[len(self.oxygen_data) - 1])), False, utils.TEXT_COLOR)
+            self.data_received_text = self.font.render("Temp: " + str(utils.parse_data(self.temp_data[len(self.temp_data) - 1])) + "°C Hum: " +
+                                            str(utils.parse_data(self.hum_data[len(self.hum_data) - 1])) + "% Ozone: " +
+                                            str(utils.parse_data(self.ozone_data[len(self.ozone_data) - 1])) + " Carbon: " +
+                                            str(utils.parse_data(self.carbon_data[len(self.carbon_data) - 1])) + " Oxygen: " +
+                                            str(utils.parse_data(self.oxygen_data[len(self.oxygen_data) - 1])), False, utils.TEXT_COLOR)
 
             pg.draw.rect(self.screen, utils.GRAPH_BACKGROUND_COLOR, self.data_received)
             self.screen.blit(self.data_received_text, (utils.PANE_WIDTH + 20, utils.TRAJECTORY_HEIGHT - 50))

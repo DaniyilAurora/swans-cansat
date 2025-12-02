@@ -31,6 +31,22 @@ DATA_RECEIVED_WINDOW_HEIGHT = 200
 PORT = 'COM3'
 BAUDRATE = 115200
 
+def rotate(lst, n):
+    """Rotate list by n positions to the right"""
+    n = n % len(lst)  # Handle n larger than list length
+    return lst[-n:] + lst[:-n]
+    
+def validate(packet: str):
+    parsed = packet.split('.')
+    shift = len(parsed) - parsed.index("101")
+
+    parsed = rotate(parsed, shift)
+
+    return parsed[1:]
+
+def parse_data(data):
+    return round(data / 10, 1)
+
 def save_data(data, filename):
     if not os.path.exists("output"):
         os.mkdir("output")
