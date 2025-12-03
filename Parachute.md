@@ -71,10 +71,10 @@ However we rounded the number up to 0.1 $$m^2$$
 
 Which means that the radius of our parachute should be.
 
-$$A=\sqrt{\frac{A}{\pi}}=\sqrt{\frac{1.40}{\pi}}\approx 0.6\ m$$
+$$A=\sqrt{\frac{A}{\pi}}=\sqrt{\frac{0.1}{\pi}}\approx 0.178\ m$$
 
-So, now we have radius, also what we would like to know is how much time it will take for a model to descend from 1000 metres to ground. For this we do simple calculation.
+So, now that we have the radius, also what we would like to know is how much time it will take for a model to descend from 1000 metres to ground. For this we do simple calculation.
 
-$$time=\frac{distance}{velocity}=\frac{1000}{2}=500\ seconds \approx 8.3\ minutes$$
+$$time=\frac{distance}{velocity}=\frac{1000}{9}=111\ seconds \approx 1.9\ minutes$$
 
-Now, this time seems to be too optimistic, so our educated guess would be 3-6 minutes.
+This falls within the maximum flight time of 120 seconds for a cansat as laid out in the 2025 CanSat Specifications.
