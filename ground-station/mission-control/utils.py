@@ -32,11 +32,12 @@ PORT = 'COM3'
 BAUDRATE = 115200
 
 def rotate(lst, n):
-    """Rotate list by n positions to the right"""
+    """Rotate list by n positions to the right."""
     n = n % len(lst)  # Handle n larger than list length
     return lst[-n:] + lst[:-n]
     
 def validate(packet: str):
+    """Validates packet using offset detection (101 always sent first, therefore if there is change in data order the data will be shifted)."""
     parsed = packet.split('.')
     shift = len(parsed) - parsed.index("101")
 
@@ -45,9 +46,11 @@ def validate(packet: str):
     return parsed[1:]
 
 def parse_data(data):
+    """Divides the data by 10 in order to get original value with decimal place."""
     return round(data / 10, 1)
 
 def save_data(data, filename):
+    """Saves collected data into output/ directory."""
     if not os.path.exists("output"):
         os.mkdir("output")
     

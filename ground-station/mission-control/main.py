@@ -55,6 +55,7 @@ class Mission_Control:
         self.serial_thread.start()
 
     def read_serial(self):
+        """Reads serial data from port."""
         print(serial.tools.list_ports.comports())
         ser = serial.Serial(utils.PORT, utils.BAUDRATE, timeout=1)
         

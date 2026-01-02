@@ -9,12 +9,14 @@ class Pane:
         self.height = height
 
     def draw(self, screen, data):
+        """Draws a pane with bars."""
         pg.draw.rect(screen, utils.GRAPH_BACKGROUND_COLOR, pg.Rect(self.x, self.y, self.width, self.height))
 
         for i in range(len(data)):
             self.draw_bar(screen, i, data)
 
     def draw_bar(self, screen, i, data):
+        """Draws a bar."""
         x_start = int(self.width * i / len(data))
         x_end = int(self.width * (i + 1) / len(data))
         bar_width = x_end - x_start

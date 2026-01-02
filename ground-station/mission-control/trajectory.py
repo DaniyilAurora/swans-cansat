@@ -9,6 +9,7 @@ class Trajectory:
         self.height = height
 
     def draw(self, screen, data):
+        """Draws a trajectory."""
         pg.draw.rect(screen, utils.TRAJECTORY_BACKGROUND_COLOR, pg.Rect(self.x, self.y, self.width, self.height))
 
         if len(data) > 1:
