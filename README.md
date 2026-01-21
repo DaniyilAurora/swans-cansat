@@ -1,6 +1,6 @@
 ﻿# Swans CanSat
 
-This is a project that is being actively developed by a small team from Swans International School Marbella to take part in the [CanSat Competition in Spain](https://esero.es/cansat).
+This is a project that is being actively developed by a small team from Swans School Marbella to take part in the [CanSat Competition in Spain](https://esero.es/cansat).
 The project consists from two separate modules, the ground station and the satellite itself.
 
 ### Mission Control
@@ -36,6 +36,7 @@ The project consists from two separate modules, the ground station and the satel
 
 ### Our Secondary Mission:
 For our secondary mission we have decided to do advanced telemetry and atmospheric analysis. This will include extra sensors such as GPS, a Gyroscope, Temperature and Humidity, Low concentration ozon sensor and a a Carbon Dioxide sensor and in the future an oxygen sensor. With the data from these sensors, we hope to be able to determine whether the atmosphere of a certain planet is suitable for human life.
+
 
 
 
