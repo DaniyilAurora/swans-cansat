@@ -57,10 +57,10 @@ def parse_data(data):
     return round(data / 10, 1)
 
 def save_data(data, filename):
-    """Saves collected data into output/ directory."""
-    if not os.path.exists("output"):
-        os.mkdir("output")
+    """Saves collected data into data/ directory."""
+    if not os.path.exists("ground-station/src/data"):
+        os.mkdir("ground-station/src/data")
     
-    with open("output/" + filename, "a") as file:
+    with open("ground-station/src/data/" + filename, "a") as file:
         for d in data:
             file.write(str(d) + "\n")
