@@ -17,14 +17,21 @@ MAX_X = 100
 MAX_Y = 1090
 MAX_DATA = 999
 
-TEXT_COLOR = pg.Color("white")
-BAR_COLOR = pg.Color(25, 146, 242)
-TRAJECTORY_BACKGROUND_COLOR = pg.Color(63, 75, 101)
-TRAJECTORY_COLOR = pg.Color("white")
-GRAPH_BACKGROUND_COLOR = pg.Color(28, 37, 54)
-BORDERS_COLOR = pg.Color(40, 57, 85)
+# New Color Palette (Premium Dark Theme)
+BACKGROUND_COLOR = pg.Color(11, 15, 25)
+GRAPH_BACKGROUND_COLOR = pg.Color(20, 27, 45)
+BORDERS_COLOR = pg.Color(45, 65, 100)
+ACCENT_COLOR = pg.Color(0, 180, 255)
+TEXT_COLOR = pg.Color(230, 240, 255)
+LABEL_COLOR = pg.Color(150, 180, 220)
+GRID_COLOR = pg.Color(35, 45, 65)
 
-TRAJECTORY_LINE_WIDTH = 4
+# Primary bar and trajectory colors
+BAR_START_COLOR = pg.Color(0, 120, 255)
+BAR_END_COLOR = pg.Color(0, 220, 255)
+TRAJECTORY_COLOR = pg.Color(255, 255, 255)
+TRAJECTORY_LINE_WIDTH = 3
+TRAJECTORY_GLOW_COLOR = pg.Color(0, 150, 255, 60) # Transparent blue for glow
 
 DATA_RECEIVED_WINDOW_HEIGHT = 200
 
